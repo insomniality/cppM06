@@ -1,15 +1,29 @@
+#include "ScalarConverter.hpp"
 
-
-static class ScalarConverter
+static char ScalarConverter::convert(std::string literal)
 {
-	public:
-		ScalarConverter();
-		ScalarConverter(const ScalarConverter& obj);
-		ScalarConverter& operator=(const ScalarConverter& obj);
-		~ScalarConverter();
-	public:
-		void convert();
-		void convert();
-		void convert();
-		void convert();
-};
+	return(literal)
+}
+
+/////////////
+
+ScalarConverter::ScalarConverter()
+{
+
+}
+
+ScalarConverter::ScalarConverter(const ScalarConverter& obj)
+{
+
+}
+
+ScalarConverter& ScalarConverter::operator=(const ScalarConverter& obj)
+{
+	if (this == &obj)
+		return (*this);
+}
+
+ScalarConverter::~ScalarConverter()
+{
+
+}
