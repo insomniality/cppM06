@@ -1,8 +1,10 @@
 #include "ScalarConverter.hpp"
 
-static char ScalarConverter::convert(std::string literal)
+char ScalarConverter::convert(std::string literal)
 {
-	return(literal)
+	char a = 'z';
+	// // (void) literal;
+	return(&a);
 }
 
 /////////////
@@ -14,6 +16,7 @@ ScalarConverter::ScalarConverter()
 
 ScalarConverter::ScalarConverter(const ScalarConverter& obj)
 {
+	(void) obj;
 
 }
 
@@ -21,6 +24,7 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& obj)
 {
 	if (this == &obj)
 		return (*this);
+	return (*this);
 }
 
 ScalarConverter::~ScalarConverter()
