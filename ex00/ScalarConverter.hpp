@@ -6,6 +6,7 @@
 class ScalarConverter
 {
 	public:
+		// static void convert(std::string literal);
 		static char convert_char(std::string literal);
 		static int convert_int(std::string literal);
 		static float convert_float(std::string literal);
