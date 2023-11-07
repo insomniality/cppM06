@@ -1,4 +1,5 @@
 #include "ScalarConverter.hpp"
+#include "Tools.cpp"
 #include <string>
 #include <cmath>
 
@@ -17,30 +18,34 @@ const char* ScalarConverter::WrongConvertion::what() const throw()
 
 char ScalarConverter::convert_char(std::string literal)
 {
-	// try
-	// {
-		if (static_cast<double>(literal[0]) > 31)
-			return(literal[0]);	
-		throw (WrongConvertion());
-	// }
-	// catch(std::exception &e)
-	// {
-	// 	std::cout << e.what() << std::endl;
-	// }
+	if (static_cast<double>(literal[0]) > 31)
+		return(stoi(literal));	
+	throw (WrongConvertion());
 }
 
 int ScalarConverter::convert_int(std::string literal)
 {
-	// try
+	// if (literal.lenght() > 1)
 	// {
-		return(stoi(literal, nullptr));
-		throw (WrongConvertion());
+	// 	if (literal[0] == '0')
+	// 	{
+	// 		if (literal[1] == 'b' || literal[1] == 'B')
+	// 		{
+	// 			// binary
+	// 		}
+	// 		else if (literal[1] == 'x' || literal[1] == 'X')
+	// 		{
+	// 			// hex
+	// 		}
+	// 		else
+	// 		{
+	// 			// octal
+	// 		}
+	// 	}
 	// }
-	// catch(std::exception &e)
-	// {
-	// 	std::cout << e.what() << std::endl;
-	// }
-	// return(-1);
+	
+	return(stoi(literal, nullptr));
+	// throw (WrongConvertion());
 }
 
 float ScalarConverter::convert_float(std::string literal)
