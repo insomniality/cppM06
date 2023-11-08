@@ -1,9 +1,16 @@
-// #include "ScalarConverter.hpp"
-// #include <cmath>
+#include "ScalarConverter.hpp"
+#include <cmath>
 
+// #ifndef TOOLS_CPP
+// # define TOOLS_CPP
 // #define sT symbolTranslator()
 
 // //111
+
+int myStoi(std::string str)
+{
+	return(atoi(str.c_str()));
+}
 
 // static int symbolTranslator(char symb)
 // {
@@ -20,3 +27,5 @@
 // 	int	b = base.lenght();
 // 	int	rtr = 0;
 // }
+
+// #endif

@@ -3,6 +3,9 @@
 
 #include <iostream>
 
+int myStoi(std::string str);
+
+
 class ScalarConverter
 {
 	public:
