@@ -7,11 +7,9 @@ int main(int argc, char** argv)
 	try
 	{
 		(void)argc;
-		(void)argv;
-		// if ()
-		// {
-		// 	/* code */
-		// }
+		// (void)argv;
+		if (argc == 1)
+			throw (ScalarConverter::NoInput());
 
 		// char a = ScalarConverter::convert_char(static_cast<std::string>(argv[1]));
 		// int b = ScalarConverter::convert_int("123");

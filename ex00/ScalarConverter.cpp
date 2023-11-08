@@ -16,11 +16,32 @@ const char* ScalarConverter::WrongConvertion::what() const throw()
 	return ("Wrong Type Convertion");
 }
 
+const char* ScalarConverter::NoInput::what() const throw()
+{
+	return ("No Input");
+};
+
 char ScalarConverter::convert_char(std::string literal)
 {
-	if (static_cast<double>(literal[0]) > 31)
-		return(static_cast<char>(myStoi(literal)));	
-	throw (WrongConvertion());
+	if (literal.length() == 1 && (literal[0] > 31 && literal[0] < 127))
+		return(literal[0]);
+	else if (literal.length() < 4 && (literal[0] >= '0' || literal[0] <= '9'))
+	{
+		if (literal.length() == 1)
+			if (static_cast<char>(myStoi(literal)) > 31 && static_cast<char>(myStoi(literal)) < 127)
+				return (static_cast<char>(myStoi(literal)));
+		if (literal.length() == 2 && (literal[1] >= '0' || literal[1] <= '9'))
+			if (static_cast<char>(myStoi(literal)) > 31 && static_cast<char>(myStoi(literal)) < 127)
+				return (static_cast<char>(myStoi(literal)));		
+		if (literal.length() == 3	&& (literal[1] >= '0' || literal[1] <= '9') \
+									&& (literal[2] >= '0' || literal[2] <= '9'))
+			if (static_cast<char>(myStoi(literal)) > 31 && static_cast<char>(myStoi(literal)) < 127)
+				return (static_cast<char>(myStoi(literal)));
+	}
+	// throw (WrongConvertion());
+	std::cout << "Impossible";
+	return('\0');
+	// if (static_cast<double>(literal[0]) > 31 && static_cast<double>(literal[0]) < 127)
 }
 
 int ScalarConverter::convert_int(std::string literal)
@@ -43,6 +64,14 @@ int ScalarConverter::convert_int(std::string literal)
 	// 		}
 	// 	}
 	// }
+	for (int i = 0; i < count; i++)
+	{
+		if (!(literal[1] >= '0' || literal[1] <= '9'))
+		{
+			std::cout << "Impossible";
+			return ();
+		}
+	}
 	return(myStoi(literal));
 	// throw (WrongConvertion());
 }
