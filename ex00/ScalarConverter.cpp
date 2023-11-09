@@ -64,37 +64,30 @@ int ScalarConverter::convert_int(std::string literal)
 	// 		}
 	// 	}
 	// }
-	for (int i = 0; i < count; i++)
-	{
-		if (!(literal[1] >= '0' || literal[1] <= '9'))
-		{
-			std::cout << "Impossible";
-			return ();
-		}
-	}
+
 	return(myStoi(literal));
 	// throw (WrongConvertion());
 }
 
 float ScalarConverter::convert_float(std::string literal)
 {
-	if (literal.find_first_of('.', 0) == std::string::npos)
-		throw (WrongConvertion());
+	// if (literal.find_first_of('.', 0) == std::string::npos)
+	// 	throw (WrongConvertion());
 
-	float l = myStoi(literal.substr(0, literal.find_first_of('.', 0))); // first half
-	float r =	myStoi(literal.substr(literal.find_first_of('.', 0) + 1, literal.length() - 1)) \
-				/ pow(10, literal.length() - literal.find_first_of('.', 0) - 1); // second half
+	float l =	myStoi(literal.substr(0, literal.find_first_of('.', 0)));						// first half
+	float r =	myStoi(literal.substr(literal.find_first_of('.', 0) + 1, literal.length() - 1))	\
+				/ pow(10, literal.length() - literal.find_first_of('.', 0) - 1);				// second half
 	return(l + r);
 }
 
 double ScalarConverter::convert_double(std::string literal)
 {
-	if (literal.find_first_of('.', 0) == std::string::npos)
-		throw (WrongConvertion());
+	// if (literal.find_first_of('.', 0) == std::string::npos)
+	// 	throw (WrongConvertion());
 
-	double l = myStoi(literal.substr(0, literal.find_first_of('.', 0))); // first half
-	double r =	myStoi(literal.substr(literal.find_first_of('.', 0) + 1, literal.length() - 1)) \
-				/ pow(10, literal.length() - literal.find_first_of('.', 0) - 1); // second half
+	double l =	myStoi(literal.substr(0, literal.find_first_of('.', 0)));						// first half
+	double r =	myStoi(literal.substr(literal.find_first_of('.', 0) + 1, literal.length() - 1))	\
+				/ pow(10, literal.length() - literal.find_first_of('.', 0) - 1);				// second half
 	return(l + r);
 	// return(static_cast<double>(myStoi(literal)));
 }
