@@ -16,9 +16,9 @@ const char* ScalarConverter::WrongConvertion::what() const throw()
 	return ("Wrong Type Convertion");
 }
 
-const char* ScalarConverter::NoInput::what() const throw()
+const char* ScalarConverter::Error::what() const throw()
 {
-	return ("No Input");
+	return ("Error");
 };
 
 char ScalarConverter::convert_char(std::string literal)

@@ -20,7 +20,7 @@ class ScalarConverter
 			public:
 				const char* what() const throw();
 		};
-		class NoInput : public std::exception
+		class Error : public std::exception
 		{
 			public:
 				const char* what() const throw();
