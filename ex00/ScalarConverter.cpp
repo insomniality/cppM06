@@ -23,7 +23,7 @@ const char* ScalarConverter::NoInput::what() const throw()
 
 char ScalarConverter::convert_char(std::string literal)
 {
-	if (literal.length() == 1 && (literal[0] > 31 && literal[0] < 127))
+	if (literal.length() == 1 && (literal[0] > 31 && literal[0] < 127) && !(literal[0] >= '0' && literal[0] <= '9'))
 		return(literal[0]);
 	else if (literal.length() < 4 && (literal[0] >= '0' || literal[0] <= '9'))
 	{
@@ -65,44 +65,50 @@ int ScalarConverter::convert_int(std::string literal)
 	// 	}
 	// }
 
+	if (literal.length() == 1)
+		return (static_cast<int>(literal[0]));
 	return(myStoi(literal));
 	// throw (WrongConvertion());
 }
 
 float ScalarConverter::convert_float(std::string literal)
 {
-	// 	throw (WrongConvertion());
 	int li;
+	float l; // first half
+	float r; // second half
+	
 	if (literal.find_first_of('.', 0) == std::string::npos)
-		li = literal.find_first_of('.', 0);
+	{
+		li = literal.length();
+		r = 0;
+	}
 	else
-		li = literal.length() - 1;
-
-	float l =	myStoi(literal.substr(0, li));						// first half
-	float r =	myStoi(literal.substr(li + 1, literal.length() - 1))	\
-				/ pow(10, literal.length() - li - 1);				// second half
-	// std::cout << l;
-	// std::cout << '.';
-	// std::cout << r << 'f' << std::endl;
+	{
+		li = literal.find_first_of('.', 0);
+		r = myStoi(literal.substr(li + 1, literal.length() - 1)) / pow(10, literal.length() - li - 1);				
+	}
+	l =	myStoi(literal.substr(0, li)); //
 	return(l + r);
 }
 
 double ScalarConverter::convert_double(std::string literal)
 {
 	int li;
+	double l; // first half
+	double r; // second half
+	
 	if (literal.find_first_of('.', 0) == std::string::npos)
-		li = literal.find_first_of('.', 0);
+	{
+		li = literal.length();
+		r = 0;
+	}
 	else
-		li = literal.length() - 1;
-
-	double l =	myStoi(literal.substr(0, li));						// first half
-	double r =	myStoi(literal.substr(li + 1, literal.length() - 1))	\
-				/ pow(10, literal.length() - li - 1);				// second half
-	// std::cout << l;
-	// std::cout << '.';
-	// std::cout << r << std::endl;
+	{
+		li = literal.find_first_of('.', 0);
+		r = myStoi(literal.substr(li + 1, literal.length() - 1)) / pow(10, literal.length() - li - 1);				
+	}
+	l =	myStoi(literal.substr(0, li)); //
 	return(l + r);
-	// return(static_cast<double>(myStoi(literal)));
 }
 
 /////////////
