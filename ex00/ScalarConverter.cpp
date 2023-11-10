@@ -23,7 +23,8 @@ const char* ScalarConverter::Error::what() const throw()
 
 char ScalarConverter::convert_char(std::string literal)
 {
-	if (literal.length() == 1 && (literal[0] > 31 && literal[0] < 127) && !(literal[0] >= '0' && literal[0] <= '9'))
+	#define SYMBOL (literal[0] > 31 && literal[0] < 127)
+	if (literal.length() == 1 && (literal[0] > 31 && literal[0] < 127) && !(literal[0] >= '0' && literal[0] <= '9')) //
 		return(literal[0]);
 	else if (literal.length() < 4 && (literal[0] >= '0' || literal[0] <= '9'))
 	{
@@ -38,8 +39,8 @@ char ScalarConverter::convert_char(std::string literal)
 			if (static_cast<char>(myStoi(literal)) > 31 && static_cast<char>(myStoi(literal)) < 127)
 				return (static_cast<char>(myStoi(literal)));
 	}
-	// throw (WrongConvertion());
 	std::cout << "Impossible";
+	// throw (WrongConvertion());
 	return('\0');
 	// if (static_cast<double>(literal[0]) > 31 && static_cast<double>(literal[0]) < 127)
 }
