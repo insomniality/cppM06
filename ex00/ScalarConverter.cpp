@@ -23,23 +23,25 @@ const char* ScalarConverter::Error::what() const throw()
 
 char ScalarConverter::convert_char(std::string literal)
 {
-	#define SYMBOL (literal[0] > 31 && literal[0] < 127)
-	if (literal.length() == 1 && (literal[0] > 31 && literal[0] < 127) && !(literal[0] >= '0' && literal[0] <= '9')) //
+	#define SYMBOL(x) (literal[x] > 31 && literal[x] < 127)
+	#define SYMBOL2 static_cast<char>(myStoi(literal)) > 31 && static_cast<char>(myStoi(literal)) < 127
+	#define NUMBER(x) (literal[x] >= '0' && literal[x] <= '9')
+
+	if (literal.length() == 1 && SYMBOL(0) && !NUMBER(0)) //
 		return(literal[0]);
-	else if (literal.length() < 4 && (literal[0] >= '0' || literal[0] <= '9'))
+	else if (literal.length() < 4 && NUMBER(0))
 	{
 		if (literal.length() == 1)
-			if (static_cast<char>(myStoi(literal)) > 31 && static_cast<char>(myStoi(literal)) < 127)
+			if (SYMBOL2)
 				return (static_cast<char>(myStoi(literal)));
-		if (literal.length() == 2 && (literal[1] >= '0' || literal[1] <= '9'))
-			if (static_cast<char>(myStoi(literal)) > 31 && static_cast<char>(myStoi(literal)) < 127)
-				return (static_cast<char>(myStoi(literal)));		
-		if (literal.length() == 3	&& (literal[1] >= '0' || literal[1] <= '9') \
-									&& (literal[2] >= '0' || literal[2] <= '9'))
-			if (static_cast<char>(myStoi(literal)) > 31 && static_cast<char>(myStoi(literal)) < 127)
+		if (literal.length() == 2 && NUMBER(1))
+			if (SYMBOL2)
+				return (static_cast<char>(myStoi(literal)));	
+		if (literal.length() == 3 && NUMBER(1) && NUMBER(2))
+			if (SYMBOL2)
 				return (static_cast<char>(myStoi(literal)));
 	}
-	std::cout << "Impossible";
+	// std::cout << "Impossible";
 	// throw (WrongConvertion());
 	return('\0');
 	// if (static_cast<double>(literal[0]) > 31 && static_cast<double>(literal[0]) < 127)
@@ -109,7 +111,7 @@ double ScalarConverter::convert_double(std::string literal)
 		r = myStoi(literal.substr(li + 1, literal.length() - 1)) / pow(10, literal.length() - li - 1);				
 	}
 	l =	myStoi(literal.substr(0, li)); //
-	return(l + r);
+	return (l + r);
 }
 
 /////////////

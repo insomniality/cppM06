@@ -17,10 +17,7 @@ void check_char(std::string literal)
 		{
 			if (!(literal[i] >= '0' && literal[i] <= '9'))
 			{
-				std::cout << "int: Impossible" << std::endl;
-				std::cout << "char: Impossible" << std::endl;
-				std::cout << "float: Impossible" << std::endl;
-				std::cout << "double: Impossible" << std::endl;
+				std::cout << "Impossible" << std::endl;
 				return ;
 			}
 			i++;
