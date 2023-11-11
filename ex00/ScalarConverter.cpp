@@ -41,7 +41,7 @@ char ScalarConverter::convert_char(std::string literal)
 			if (SYMBOL2)
 				return (static_cast<char>(myStoi(literal)));
 	}
-	// std::cout << "Impossible";
+	std::cout << "Impossible";
 	// throw (WrongConvertion());
 	return('\0');
 	// if (static_cast<double>(literal[0]) > 31 && static_cast<double>(literal[0]) < 127)

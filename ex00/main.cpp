@@ -42,22 +42,22 @@ int main(int argc, char** argv)
 
 		// printf("%i\n", stoi(static_cast<std::string>(argv[1]), nullptr));
 
-		unsigned long i = 0;
-		while (i < static_cast<std::string>(argv[1]).length())
-		{
-			if (!(argv[1][i] >= '0' && argv[1][i] <= '9'))
-			{
-				std::cout << "int: Impossible" << std::endl;
-				std::cout << "char: Impossible" << std::endl;
-				std::cout << "float: Impossible" << std::endl;
-				std::cout << "double: Impossible" << std::endl;
-				return (0);
-			}
-			i++;
-		}
+		// unsigned long i = 0;
+		// while (i < static_cast<std::string>(argv[1]).length())
+		// {
+		// 	if (!(argv[1][i] >= '0' && argv[1][i] <= '9'))
+		// 	{
+		// 		std::cout << "int: Impossible" << std::endl;
+		// 		std::cout << "char: Impossible" << std::endl;
+		// 		std::cout << "float: Impossible" << std::endl;
+		// 		std::cout << "double: Impossible" << std::endl;
+		// 		return (0);
+		// 	}
+		// 	i++;
+		// }
 		// if (i == static_cast<std::string>(argv[1]).length());
-
-		std::cout << "char: " << ScalarConverter::convert_char(static_cast<std::string>(argv[1])) << std::endl;
+		check_char(static_cast<std::string>(argv[1]));
+		// std::cout << "char: " << ScalarConverter::convert_char(static_cast<std::string>(argv[1])) << std::endl;
 		std::cout << "int: " << ScalarConverter::convert_int(static_cast<std::string>(argv[1])) << std::endl;
 		std::cout << "float: " << ScalarConverter::convert_float(static_cast<std::string>(argv[1]));
 		if (static_cast<std::string>(argv[1]).find_first_of('.', 0) == std::string::npos)
