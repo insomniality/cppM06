@@ -55,9 +55,13 @@ char ScalarConverter::convert_char(std::string literal)
 
 		i++;
 	}
+	if (literal.length() > 1 && literal[0] != '0')
+	{
+
+	}
 	
 	std::cout << "Impossible";
-				// return (static_cast<char>(myStoi(literal)));
+	// return (static_cast<char>(myStoi(literal)));
 
 	// throw (WrongConvertion());
 	return('\0');
