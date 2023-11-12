@@ -27,21 +27,38 @@ char ScalarConverter::convert_char(std::string literal)
 	#define SYMBOL2 static_cast<char>(myStoi(literal)) > 31 && static_cast<char>(myStoi(literal)) < 127
 	#define NUMBER(x) (literal[x] >= '0' && literal[x] <= '9')
 
-	if (literal.length() == 1 && SYMBOL(0) && !NUMBER(0)) //
-		return(literal[0]);
-	else if (literal.length() < 4 && NUMBER(0))
+	// if (literal.length() == 1 && SYMBOL(0) && !NUMBER(0)) //
+	// 	return(literal[0]);
+	// else if (literal.length() < 4 && NUMBER(0))
+	// {
+	// 	if (literal.length() == 1)
+	// 		if (SYMBOL2)
+	// 			return (static_cast<char>(myStoi(literal)));
+	// 	if (literal.length() == 2 && NUMBER(1))
+	// 		if (SYMBOL2)
+	// 			return (static_cast<char>(myStoi(literal)));	
+	// 	if (literal.length() == 3 && NUMBER(1) && NUMBER(2))
+	// 		if (SYMBOL2)
+	// 			return (static_cast<char>(myStoi(literal)));
+	// }
+
+	std::cout << "char: ";
+	if (literal[0] == '-' || literal[0] == '+')
 	{
-		if (literal.length() == 1)
-			if (SYMBOL2)
-				return (static_cast<char>(myStoi(literal)));
-		if (literal.length() == 2 && NUMBER(1))
-			if (SYMBOL2)
-				return (static_cast<char>(myStoi(literal)));	
-		if (literal.length() == 3 && NUMBER(1) && NUMBER(2))
-			if (SYMBOL2)
-				return (static_cast<char>(myStoi(literal)));
+		std::cout << literal[0];
+		literal == literal.substr(1, std::string::npos);
 	}
+	
+	int i = 0;
+	if (NUMBER(i))
+	{
+
+		i++;
+	}
+	
 	std::cout << "Impossible";
+				// return (static_cast<char>(myStoi(literal)));
+
 	// throw (WrongConvertion());
 	return('\0');
 	// if (static_cast<double>(literal[0]) > 31 && static_cast<double>(literal[0]) < 127)
