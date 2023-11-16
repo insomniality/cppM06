@@ -5,26 +5,26 @@
 ///TODO: 1234ksfv esi
 ///TODO: ete verjum ket ka chka et miat knaes
 
-void check_char(std::string literal)
-{
-	// f;-;(+);.;
-	unsigned long i = 0;
+// void check_char(std::string literal)
+// {
+// 	// f;-;(+);.;
+// 	unsigned long i = 0;
 
-	std::cout << "char: ";
-	if (literal.length() > 1)
-	{
-		while (i < literal.length())
-		{
-			if (!(literal[i] >= '0' && literal[i] <= '9'))
-			{
-				std::cout << "Impossible" << std::endl;
-				return ;
-			}
-			i++;
-		}
-	}
-	std::cout << ScalarConverter::convert_char(literal) << std::endl;
-}
+// 	// std::cout << "char: ";
+// 	if (literal.length() > 1)
+// 	{
+// 		while (i < literal.length())
+// 		{
+// 			if (!(literal[i] >= '0' && literal[i] <= '9'))
+// 			{
+// 				std::cout << "Impossible" << std::endl;
+// 				return ;
+// 			}
+// 			i++;
+// 		}
+// 	}
+// 	std::cout << ScalarConverter::convert_char(literal);
+// }
 
 int main(int argc, char** argv)
 {
@@ -56,7 +56,9 @@ int main(int argc, char** argv)
 		// 	i++;
 		// }
 		// if (i == static_cast<std::string>(argv[1]).length());
-		check_char(static_cast<std::string>(argv[1]));
+		std::cout << "\n";
+
+		ScalarConverter::convert_char(static_cast<std::string>(argv[1]));
 		// std::cout << "char: " << ScalarConverter::convert_char(static_cast<std::string>(argv[1])) << std::endl;
 		std::cout << "int: " << ScalarConverter::convert_int(static_cast<std::string>(argv[1])) << std::endl;
 		std::cout << "float: " << ScalarConverter::convert_float(static_cast<std::string>(argv[1]));

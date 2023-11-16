@@ -21,51 +21,72 @@ const char* ScalarConverter::Error::what() const throw()
 	return ("Error");
 };
 
-char ScalarConverter::convert_char(std::string literal)
+void ScalarConverter::convert_char(std::string literal)
 {
 	#define SYMBOL(x) (literal[x] > 31 && literal[x] < 127)
 	#define SYMBOL2 static_cast<char>(myStoi(literal)) > 31 && static_cast<char>(myStoi(literal)) < 127
 	#define NUMBER(x) (literal[x] >= '0' && literal[x] <= '9')
 
-	// if (literal.length() == 1 && SYMBOL(0) && !NUMBER(0)) //
-	// 	return(literal[0]);
-	// else if (literal.length() < 4 && NUMBER(0))
-	// {
-	// 	if (literal.length() == 1)
-	// 		if (SYMBOL2)
-	// 			return (static_cast<char>(myStoi(literal)));
-	// 	if (literal.length() == 2 && NUMBER(1))
-	// 		if (SYMBOL2)
-	// 			return (static_cast<char>(myStoi(literal)));	
-	// 	if (literal.length() == 3 && NUMBER(1) && NUMBER(2))
-	// 		if (SYMBOL2)
-	// 			return (static_cast<char>(myStoi(literal)));
-	// }
-
 	std::cout << "char: ";
-	if (literal[0] == '-' || literal[0] == '+')
+	if (literal.length() > 1 && (literal[0] == '-' || literal[0] == '+')) // +- momnd (minimal)
 	{
-		std::cout << literal[0];
-		literal == literal.substr(1, std::string::npos);
+		if (literal[0] == '-')
+			std::cout << literal[0];
+		literal = literal.substr(1, std::string::npos);
 	}
-	
-	int i = 0;
-	if (NUMBER(i))
+	for (unsigned long i = 0; i < literal.length(); i++) // tver vor linen sagh
 	{
-
-		i++;
+		if (!NUMBER(i))
+		{
+			std::cout << "Impossible" << std::endl;
+			return ;
+		}
 	}
-	if (literal.length() > 1 && literal[0] != '0')
+	if (literal.length() > 1 && literal[0] == '0') // 0456 tiv goyutyun chuni xosqi
 	{
-
+		std::cout << "Impossible" << std::endl;;
+		return ;
 	}
-	
-	std::cout << "Impossible";
-	// return (static_cast<char>(myStoi(literal)));
+	if (!SYMBOL(0) && static_cast<char>(myStoi(literal)) < 32) // 0456 tiv goyutyun chuni xosqi
+	{
+		std::cout << "Impossible" << std::endl;;
+		return ;
+	}
 
-	// throw (WrongConvertion());
-	return('\0');
-	// if (static_cast<double>(literal[0]) > 31 && static_cast<double>(literal[0]) < 127)
+	if (literal.length() == 1 && SYMBOL(0) && !NUMBER(0)) //
+	{
+		std::cout << literal[0] << std::endl;
+		return ;
+	}
+	else if (literal.length() < 4 && NUMBER(0))
+	{
+		if (literal.length() == 1)
+		{
+			if (SYMBOL2)
+			{
+				std::cout << static_cast<char>(myStoi(literal)) << std::endl;
+				return ;
+			}
+		}
+		if (literal.length() == 2 && NUMBER(1))
+		{
+			if (SYMBOL2)
+			{
+				std::cout << static_cast<char>(myStoi(literal)) << std::endl;
+				return ;
+			}
+		}
+		if (literal.length() == 3 && NUMBER(1) && NUMBER(2))
+		{
+			if (SYMBOL2)
+			{
+				std::cout << static_cast<char>(myStoi(literal)) << std::endl;
+				return ;
+			}
+		}
+	}
+	// std::cout << "ImpossiblE" << std::endl;
+	return ;
 }
 
 int ScalarConverter::convert_int(std::string literal)
