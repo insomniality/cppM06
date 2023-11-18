@@ -5,6 +5,8 @@
 ///TODO: 1234ksfv esi
 ///TODO: ete verjum ket ka chka et miat knaes
 
+///TODO: new: case 128.23a4
+
 // void check_char(std::string literal)
 // {
 // 	// f;-;(+);.;
@@ -62,6 +64,7 @@ int main(int argc, char** argv)
 		std::cout << "\n";
 
 		ScalarConverter::convert(argv[1]);
+
 	}
 	catch(const std::exception& e)
 	{

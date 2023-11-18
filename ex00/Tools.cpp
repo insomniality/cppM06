@@ -15,8 +15,6 @@ void ScalarConverter::check_arg(const std::string& str)
 	size_t start = (str[0] == '+' || str[0] == '-' ? 1 : 0);
 	size_t end = (str[str.size() - 1] == 'f' ? str.size() - 2 : str.size());
 
-	std::cout << start << " , " << end << "\n";
-
 	if (str.find('.') != str.rfind('.'))
 		throw InvalidValue();
 
