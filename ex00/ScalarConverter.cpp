@@ -16,77 +16,69 @@ const char* ScalarConverter::WrongConvertion::what() const throw()
 	return ("Wrong Type Convertion");
 }
 
-const char* ScalarConverter::Error::what() const throw()
+const char* ScalarConverter::InvalidValue::what() const throw()
 {
-	return ("Error");
+	return ("Invalid value");
 };
 
-void ScalarConverter::convert_char(std::string literal)
+///TODO: 023 case
+///TODO: 02a3 case
+///TODO: +48 case
+
+void ScalarConverter::convert(const std::string &argv)
 {
-	#define SYMBOL(x) (literal[x] > 31 && literal[x] < 127)
-	#define SYMBOL2 static_cast<char>(myStoi(literal)) > 31 && static_cast<char>(myStoi(literal)) < 127
-	#define NUMBER(x) (literal[x] >= '0' && literal[x] <= '9')
+	check_arg(argv);
+
+	// int barev = myStoi(argv);
+
+	convert_char(argv);
+	// std::cout << "char: " << convert_char(argv) << std::endl;
+	std::cout << "int: " << convert_int(argv) << std::endl;
+	std::cout << "float: " << convert_float(argv);
+	if (argv.find_first_of('.', 0) == std::string::npos)
+		std::cout << ".0";
+	std::cout << 'f' << std::endl;
+	std::cout << "double: " << convert_double(argv);
+	if (argv.find_first_of('.', 0) == std::string::npos)
+		std::cout << ".0";
+	std::cout << std::endl;
+}
+
+void ScalarConverter::convert_char(std::string str)
+{
+	#define ascii(x) static_cast<char>(myStoi(x))
+	#define SYMBOL(x) (str[x] > 31 && str[x] < 127)
+	#define SYMBOL2(x) (ascii(x) > 31 && ascii(x) < 127)
+	#define NUMBER(x) (str[x] >= '0' && str[x] <= '9')
+	#define NDSYMBOL(x) ((ascii(x) >= 0 && ascii(x) <= 31) || ascii(x) == 127)
+	#define NDSYMBOL2(x) ((x >= 0 && x <= 31) || x == 127)
 
 	std::cout << "char: ";
-	if (literal.length() > 1 && (literal[0] == '-' || literal[0] == '+')) // +- momnd (minimal)
+
+	if (str.size() == 1 && !NUMBER(0))
 	{
-		if (literal[0] == '-')
-			std::cout << literal[0];
-		literal = literal.substr(1, std::string::npos);
-	}
-	for (unsigned long i = 0; i < literal.length(); i++) // tver vor linen sagh
-	{
-		if (!NUMBER(i))
-		{
-			std::cout << "Impossible" << std::endl;
-			return ;
-		}
-	}
-	if (literal.length() > 1 && literal[0] == '0') // 0456 tiv goyutyun chuni xosqi
-	{
-		std::cout << "Impossible" << std::endl;;
-		return ;
-	}
-	if (!SYMBOL(0) && static_cast<char>(myStoi(literal)) < 32) // 0456 tiv goyutyun chuni xosqi
-	{
-		std::cout << "Impossible" << std::endl;;
+		std::cout << str[0] << "\n";
 		return ;
 	}
 
-	if (literal.length() == 1 && SYMBOL(0) && !NUMBER(0)) //
+	int n = myStoi(str);
+
+	if (n > 31 && n < 127)
 	{
-		std::cout << literal[0] << std::endl;
+		std::cout << static_cast<char>(n) << "\n";
+	}
+
+	if (NDSYMBOL2(n))
+	{
+		std::cout << "Non displayable\n";
 		return ;
 	}
-	else if (literal.length() < 4 && NUMBER(0))
-	{
-		if (literal.length() == 1)
-		{
-			if (SYMBOL2)
-			{
-				std::cout << static_cast<char>(myStoi(literal)) << std::endl;
-				return ;
-			}
-		}
-		if (literal.length() == 2 && NUMBER(1))
-		{
-			if (SYMBOL2)
-			{
-				std::cout << static_cast<char>(myStoi(literal)) << std::endl;
-				return ;
-			}
-		}
-		if (literal.length() == 3 && NUMBER(1) && NUMBER(2))
-		{
-			if (SYMBOL2)
-			{
-				std::cout << static_cast<char>(myStoi(literal)) << std::endl;
-				return ;
-			}
-		}
-	}
-	// std::cout << "ImpossiblE" << std::endl;
+
+	if (n < 0 || n > 127)	
+		std::cout << "Impossible";
+
 	return ;
+
 }
 
 int ScalarConverter::convert_int(std::string literal)
@@ -150,9 +142,9 @@ double ScalarConverter::convert_double(std::string literal)
 	else
 	{
 		li = literal.find_first_of('.', 0);
-		r = myStoi(literal.substr(li + 1, literal.length() - 1)) / pow(10, literal.length() - li - 1);				
+		r = myStoi(literal.substr(li + 1, literal.length() - 1)) / pow(10, literal.length() - li - 1);
 	}
-	l =	myStoi(literal.substr(0, li)); //
+	l =	myStoi(literal.substr(0, li));
 	return (l + r);
 }
 
@@ -170,8 +162,7 @@ ScalarConverter::ScalarConverter(const ScalarConverter& obj)
 
 ScalarConverter& ScalarConverter::operator=(const ScalarConverter& obj)
 {
-	if (this == &obj)
-		return (*this);
+	(void) obj;
 	return (*this);
 }
 
@@ -179,3 +170,110 @@ ScalarConverter::~ScalarConverter()
 {
 
 }
+
+	// // int polarity = 0;
+	// // #define p polarity
+
+	// if (str.length() == 1) // && ascii(literal) < 32
+	// {
+	// 	if (SYMBOL2(str))
+	// 	{
+	// 		std::cout << ascii(str) << std::endl;
+	// 		return ;
+	// 	}
+	// 	// else // ete tiva, isk mianish tiv@ imposible a
+	// 	// {
+	// 		if(NDSYMBOL(str))
+	// 			std::cout << "Non displayable" << std::endl;
+	// 		else
+	// 			std::cout << "Impossible" << std::endl;
+	// 		return ;
+	// 	// }
+	// }
+	// // if (literal.length() > 1 && (literal[0] == '-' || literal[0] == '+')) // +- momnd (minimal)
+	// // {
+	// // 	if (literal[0] == '-')
+	// // 		p = -1;
+	// // 	else if (literal[0] == '+')
+	// // 		p = 1;
+	// // }
+	// for (unsigned long i = 0; i < str.length(); i++) // tver vor linen sagh
+	// {
+	// 	if (!NUMBER(i))
+	// 	{
+	// 		if(NDSYMBOL(str))
+	// 			std::cout << "Non displayable" << std::endl;
+	// 		else
+	// 			std::cout << "Impossible" << std::endl;
+	// 		return ;
+	// 	}
+	// }
+	// if (str.length() > 1 && str[0] == '0') // 0456 tiv goyutyun chuni xosqi
+	// {
+	// 	if(NDSYMBOL(str))
+	// 		std::cout << "Non displayable" << std::endl;
+	// 	else
+	// 		std::cout << "Impossible" << std::endl;
+	// 	return ;
+	// }
+	// if (!SYMBOL2(str)) // && ascii(literal) < 32
+	// {
+	// 	if(NDSYMBOL(str))
+	// 		std::cout << "Non displayable" << std::endl;
+	// 	else
+	// 		std::cout << "Impossible" << std::endl;
+	// 	return ;
+	// }
+	// //
+	// if (str.length() == 1 && SYMBOL(0) && !NUMBER(0)) // !!!!!!!!!!!!!!!!!
+	// {
+	// 	std::cout << str[0] << std::endl;
+	// 	return ;
+	// }
+	// else if (str.length() < 4 && NUMBER(0))
+	// {
+	// 	if (str.length() == 1)
+	// 	{
+	// 		if (SYMBOL2(str))
+	// 		{
+	// 			// if (p == -1 || p == 1)
+	// 			// {
+	// 			// 	if(p == -1)
+	// 			// 		std::cout << literal[0];
+	// 			// 	literal = literal.substr(1, std::string::npos);
+	// 			// }
+	// 			std::cout << ascii(str) << std::endl;
+	// 			return ;
+	// 		}
+	// 	}
+	// 	if (str.length() == 2 && NUMBER(1))
+	// 	{
+	// 		if (SYMBOL2(str))
+	// 		{
+	// 			// if (p == -1 || p == 1)
+	// 			// {
+	// 			// 	if(p == -1)
+	// 			// 		std::cout << literal[0];
+	// 			// 	literal = literal.substr(1, std::string::npos);
+	// 			// }
+	// 			std::cout << ascii(str) << std::endl;
+	// 			return ;
+	// 		}
+	// 	}
+	// 	if (str.length() == 3 && NUMBER(1) && NUMBER(2))
+	// 	{
+	// 		if (SYMBOL2(str))
+	// 		{
+	// 			// if (p == -1 || p == 1)
+	// 			// {
+	// 			// 	if(p == -1)
+	// 			// 		std::cout << literal[0];
+	// 			// 	literal = literal.substr(1, std::string::npos);
+	// 			// }
+	// 			std::cout << ascii(str) << std::endl;
+	// 			return ;
+	// 		}
+	// 	}
+	// }
+	// // std::cout << "ImpossiblE" << std::endl;
+	// return ;

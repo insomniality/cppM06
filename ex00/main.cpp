@@ -33,7 +33,10 @@ int main(int argc, char** argv)
 		(void)argc;
 		// (void)argv;
 		if (argc != 2)
-			throw (ScalarConverter::Error());
+		{
+			std::cout << "Wrong argc\n";
+			return 0;
+		}
 
 		// char a = ScalarConverter::convert_char(static_cast<std::string>(argv[1]));
 		// int b = ScalarConverter::convert_int("123");
@@ -58,17 +61,7 @@ int main(int argc, char** argv)
 		// if (i == static_cast<std::string>(argv[1]).length());
 		std::cout << "\n";
 
-		ScalarConverter::convert_char(static_cast<std::string>(argv[1]));
-		// std::cout << "char: " << ScalarConverter::convert_char(static_cast<std::string>(argv[1])) << std::endl;
-		std::cout << "int: " << ScalarConverter::convert_int(static_cast<std::string>(argv[1])) << std::endl;
-		std::cout << "float: " << ScalarConverter::convert_float(static_cast<std::string>(argv[1]));
-		if (static_cast<std::string>(argv[1]).find_first_of('.', 0) == std::string::npos)
-			std::cout << ".0";
-		std::cout << 'f' << std::endl;
-		std::cout << "double: " << ScalarConverter::convert_double(static_cast<std::string>(argv[1]));
-		if (static_cast<std::string>(argv[1]).find_first_of('.', 0) == std::string::npos)
-			std::cout << ".0";
-		std::cout << std::endl;
+		ScalarConverter::convert(argv[1]);
 	}
 	catch(const std::exception& e)
 	{

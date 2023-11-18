@@ -10,22 +10,27 @@ class ScalarConverter
 {
 	public:
 		// static void convert(std::string literal);
+		static void convert(const std::string &argv);
+	private:
+		static int myStoi(std::string str);
+		static void check_arg(const std::string& str);
+
 		static void convert_char(std::string literal);
 		static int convert_int(std::string literal);
 		static float convert_float(std::string literal);
 		static double convert_double(std::string literal);
-	public:
+
 		class WrongConvertion : public std::exception
 		{
 			public:
 				const char* what() const throw();
 		};
-		class Error : public std::exception
+		class InvalidValue : public std::exception
 		{
 			public:
 				const char* what() const throw();
 		};
-	public:
+	private:
 		ScalarConverter();
 		ScalarConverter(const ScalarConverter& obj);
 		ScalarConverter& operator=(const ScalarConverter& obj);
