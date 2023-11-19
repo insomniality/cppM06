@@ -23,18 +23,23 @@ const char* ScalarConverter::InvalidValue::what() const throw()
 
 void ScalarConverter::convert(const std::string &argv)
 {
-	if (argv == "+inff" || argv == "-inff" || argv == "nanf" || argv == "nan")
+	if (argv == "+inff" || argv == "-inff" || argv == "+inf" || argv == "-inf" || argv == "nanf" || argv == "nan")
 	{
 		std::cout << "char: Impossible" << std::endl;
 		std::cout << "int: Impossible" << std::endl;
-		if (argv == "nan")
-			std::cout << "float: Impossible" << std::endl;
+
+		std::cout << "float: " << argv;
+		if ((argv[1] == 'i' && argv.size() == 4) || (argv[0] == 'n' && argv.size() == 3))
+			std::cout << 'f';
+		std::cout << std::endl;
+		
+		std::cout << "double: ";
+		if ((argv[1] == 'i' && argv.size() == 5) || (argv[0] == 'n' && argv.size() == 4))
+			std::cout << argv.substr(0, argv.size() - 1);
 		else
-			std::cout << "float: " << argv << std::endl;
-		if (argv == "nanf")
-			std::cout << "double: Impossible" << std::endl;
-		else
-			std::cout << "double: " << argv << std::endl;
+			std::cout << argv;
+		std::cout << std::endl;
+		
 		return ;
 	}
 	
